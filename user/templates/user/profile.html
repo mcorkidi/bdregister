@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Phone</p>
-                                        <h6 class="text-muted f-w-400">98979989898</h6>
+                                        <h6 class="text-muted f-w-400"></h6>
                                     </div>
                                 </div>
                                 <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Your Products</h6>
@@ -38,7 +38,7 @@
                                         <h6 class="text-muted f-w-400">
                                             {% for i in consumer %}
 
-                                            {{ i.sku}} - {{i.name}}
+                                            {{ i.sku}} - {{i.sku.name}}
                                             <br>
                                             {%endfor%}
                                         </h6>

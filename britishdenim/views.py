@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Item, Consumer
+from .models import Item, Consumer, Scan
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from datetime import datetime
@@ -36,11 +36,20 @@ def register(request, sku):
         return ip
     ip = get_client_ip(request)
     print(ip)
-    ipCall = ipInfo(ip)
-    city = ipCall['city']
-
-    items = Item.objects.all()
     
+    ipCall = ipInfo(ip)
+    items = Item.objects.all()
+    if ipCall['bogon'] ==True:
+        print("Invalid IP")
+        city = 'No IP'
+        where = 'No IP'   
+        country = 'No IP'
+    else:
+        city = ipCall['city']
+        where = ipCall['region']    
+        country = ipCall['country']
+    when = datetime.now()
+
     if request.method == 'POST':
        
         print(request.POST)
@@ -52,11 +61,10 @@ def register(request, sku):
         password = request.POST.get('inputPassword',"")
         first_name = request.POST.get('first_name',"")
         last_name = request.POST.get('last_name',"")
-        country = ipCall['country']
+        
         city = request.POST.get('city', "city")
-        where = ipCall['region']
-        when = datetime.now()
-        telephone = request.POST.get('telephone', '')
+        
+        
         getInfo = request.POST.get('getInfo', 'Off')
         
         if getInfo == 'on':
@@ -84,7 +92,12 @@ def register(request, sku):
         #inform user everything saved ok and direct to profile to view registered products
         return redirect('profile')
 
-
+    if sku == '_':
+        pass
+    else:
+        item=items.get(sku=sku)
+        newScan = Scan(sku=item,where=where,when=when,country=country,city=city)
+        newScan.save()
     context = {'sku': sku, 'city': city}  
 
     return render(request, 'britishdenim/registration.html', context)
