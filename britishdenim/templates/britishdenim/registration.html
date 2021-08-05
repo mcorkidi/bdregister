@@ -18,119 +18,81 @@
 </div>
 
 <div class="d-flex justify-content-center"> 
-    <div class="container-contact">
+    <div class="container-contact d-flex justify-content-center">
+        <div class="row my-2 mx-2">
         
-        <form class="row" method="POST">
-            <div class="col-3">
+            <div class="col-md-4">
                     <br>
-                    <img src="{% static '/britishdenim/images/side.jpeg' %}" class="img-fluid" padding-top="20">
+                    <img src="{% static '/britishdenim/images/side.jpeg' %}" width="85%" height="80%" padding-right="50" padding-top="110">
                 
             </div>
-            {% csrf_token %}
-
-            <div class="col-8">
-                <div class="row">
-                    <div class="col-12">
-                        <br>
-                        <label for="inputSku" class="form-label">Sku</label>
-                        <input type="text" {% if sku != "_" %}readonly value= "{{ sku }}"{%endif%} class="form-control" id="inputSku" name="inputSku" placeholder="Enter SKU from item. Ex. RE-2345" >
-                    </div>
-                </div>
             
-                <div class="row">
-                    
-                    <div class="col-6">
+
+            <div class="col-md-8">
+                <form method="POST">
+                {% csrf_token %}
+                
+                    <br>
+                    <label for="inputSku" class="form-label">Sku</label>
+                    <input type="text" {% if sku != "_" %}readonly value= "{{ sku }}"{%endif%} class="form-control" id="inputSku" name="inputSku" placeholder="Enter SKU from item. Ex. RE-2345" >
+                    <br>
+      
                     <label for="inputEmail" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" 
                     {% if user.is_authenticated %}
                     value= {{user.email}} readonly
                     {% endif %}
                     >
-                    </div>
+               
                     {% if user.is_authenticated %}
-                    <div class="col-6"></div>
+                   
                     {%else%} 
-                    <div class="col-6">
+                   
                     <label for="inputPassword" class="form-label">Password</label>
                     <input type="password" class="form-control" id="inputPassword" name="inputPassword">
-                    </div>
+                 
                     {% endif %}
-                </div>
-                <div class="row">
-                    
-                    <div class="col-6">
+              
                     <label for="first_name" class="form-label">Name</label>
                     <input type="text" class="form-control" id="first_name" name="first_name"
                     {% if user.is_authenticated %}
                     value= {{user.first_name}} readonly
                     {%endif%}>
-                    </div>
-                    <div class="col-6">
+                    
                     <label for="last_name" class="form-label">Last Name</label>
                     <input type="text" class="form-control" id="last_name" name="last_name"
                     {% if user.is_authenticated %}
                     value= {{user.last_name}} readonly
                     {% endif %}
                     >
-                    </div>
-                </div>
-                <div class="row">
-                    
-                    <!-- <div class="col-4">
-                    <label for="country" class="form-label">Country</label>
-                    <input type="text" class="form-control" id="country" name="country" placeholder="Country">
-                    </div> -->
-                    <div class="col-6">
+                 
                     <label for="city" class="form-label">City</label>
                     <input type="text" class="form-control" id="city" name="city" placeholder="City" value={{city}}>
-                    </div>
-                </div>
-                <!-- <div class="row">
-                    <div class="col-3"></div>
-                    <div class="col-4">
-                    <label for="where" class="form-label">Where did you buy it?</label>
-                    <input type="text" class="form-control" id="where" name="where" placeholder="Name of store">
-                    </div>
-                    <div class="col-4">
-                        <label for="when" class="form-label">When did you buy it?</label>
-                        <input type="datetime-picker" class="form-control" id="when" name="when" placeholder="Date">
-                    </div>
-                </div> -->
-                <div class="row">
-                    <div class="col-6"></div>
-                    <!-- <div class="col-4">
-                        <label for="telephone" class="form-label">Telephone</label>
-                        <input type="text" class="form-control" id="telephone" name="telephone"
-                        {% if user.is_authenticated %}
-                        value= {{user}} readonly
-                        {% endif %}
-                        >
-                        </div> -->
                     
-                    <div class="col-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="getInfo" name="getInfo" checked>
-                            <label class="form-check-label" for="getInfo">
-                            Send me information on future deals.
-                            </label>
-                        </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="getInfo" name="getInfo" checked>
+                        <label class="form-check-label" for="getInfo">
+                        Send me information on future deals.
+                        </label>
                     </div>
-                </div>
-                <div class="row">
-                    
-                    <div class="col-4">
+            
+                  
                         <button type="submit" class="btn btn-primary">Register</button>
-                    </div>
-                </div>  
+                        
+                        
+                  
             </div>
         </form>
-
-            <!-- facebook share button -->
-        <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0" nonce="mchNiWPh"></script>
-        <div class="fb-share-button" data-href="https://www.facebook.com/britishdenimlatam/" data-layout="button" data-size="large">
-            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
         </div>
+            <!-- facebook share button -->
+            <div id="fb-root">
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0" nonce="mchNiWPh"></script>
+                <div class="fb-share-button" data-href="https://www.facebook.com/britishdenimlatam/" data-layout="button" data-size="large">
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+                </div>
+            </div>
+                
+            
     </div>
 </div> 
     {% endblock %} 
