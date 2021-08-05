@@ -36,7 +36,7 @@ def register(request, sku):
         return ip
     ip = get_client_ip(request)
     print(ip)
-    ipCall = ipInfo('190.34.172.98')
+    ipCall = ipInfo(ip)
     city = ipCall['city']
 
     items = Item.objects.all()
