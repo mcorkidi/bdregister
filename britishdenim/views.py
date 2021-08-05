@@ -39,15 +39,20 @@ def register(request, sku):
     
     ipCall = ipInfo(ip)
     items = Item.objects.all()
-    if ipCall['bogon'] ==True:
-        print("Invalid IP")
+    try: 
+        if ipCall['bogon'] ==True:
+            print("Invalid IP")
+            city = 'No IP'
+            where = 'No IP'   
+            country = 'No IP'
+        else:
+            city = ipCall['city']
+            where = ipCall['region']    
+            country = ipCall['country']
+    except:
         city = 'No IP'
         where = 'No IP'   
         country = 'No IP'
-    else:
-        city = ipCall['city']
-        where = ipCall['region']    
-        country = ipCall['country']
     when = datetime.now()
 
     if request.method == 'POST':
