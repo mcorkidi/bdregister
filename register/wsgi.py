@@ -1,8 +1,8 @@
 import os
 import sys
 
-sys.path.append('/opt/bitnami/projects/tutorial')
-os.environ.setdefault("PYTHON_EGG_CACHE", "/opt/bitnami/projects/bdregister/egg_cache")
+sys.path.append('/opt/bitnami/projects/register')
+os.environ.setdefault("PYTHON_EGG_CACHE", "/opt/bitnami/projects/register/egg_cache")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "register.settings")
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
