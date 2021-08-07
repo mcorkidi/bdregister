@@ -20,8 +20,10 @@ def signin(request):
     if request.method == 'POST':
         form = SigninForm(request.POST)
         if form.is_valid():
+            print(form)
+            
             form.save()
-            username = form.cleaned_data.get('username')
+            
             return redirect('login')
 
     else:

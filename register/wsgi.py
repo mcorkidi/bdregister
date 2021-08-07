@@ -1,8 +1,16 @@
-import os
-import sys
+"""
+WSGI config for register project.
 
-sys.path.append('/opt/bitnami/projects/register')
-os.environ.setdefault("PYTHON_EGG_CACHE", "/opt/bitnami/projects/register/egg_cache")
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "register.settings")
+It exposes the WSGI callable as a module-level variable named ``application``.
+
+For more information on this file, see
+https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
+"""
+
+import os
+
 from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'register.settings')
+
 application = get_wsgi_application()
