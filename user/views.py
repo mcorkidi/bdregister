@@ -20,7 +20,6 @@ def signin(request):
     if request.method == 'POST':
         form = SigninForm(request.POST)
         if form.is_valid():
-            print(form)
             
             form.save()
             
