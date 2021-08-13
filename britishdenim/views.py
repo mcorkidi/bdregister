@@ -3,6 +3,7 @@ from .models import Item, Consumer, Scan
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.utils.translation import gettext as _
 
 def ipInfo(addr=''):
     from urllib.request import urlopen
@@ -42,17 +43,17 @@ def register(request, sku):
     try: 
         if ipCall['bogon'] ==True:
             print("Invalid IP")
-            city = 'No IP'
-            where = 'No IP'   
-            country = 'No IP'
+            city = 'City'
+            where = 'NotDetected'   
+            country = 'NotDetected'
         else:
             city = ipCall['city']
             where = ipCall['region']    
             country = ipCall['country']
     except:
-        city = 'No IP'
-        where = 'No IP'   
-        country = 'No IP'
+        city = ipCall['city']
+        where = ipCall['region']   
+        country = ipCall['country']
     when = datetime.now()
 
     if request.method == 'POST':

@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-11 16:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: britishdenim/templates/britishdenim/base.html:14
+msgid "British Denim Product Registration"
+msgstr "Registra British Denim"
+
+#: britishdenim/templates/britishdenim/base.html:28
+msgid "Home"
+msgstr "Inicio"
+
+#: britishdenim/templates/britishdenim/base.html:31
+msgid "Profile"
+msgstr "Perfil"
+
+#: britishdenim/templates/britishdenim/base.html:34
+msgid "Register Product"
+msgstr "Registro de Producto"
+
+#: britishdenim/templates/britishdenim/base.html:37
+#, fuzzy
+#| msgid "Contact us"
+msgid "Contact Us"
+msgstr "Contáctanos"
+
+#: britishdenim/templates/britishdenim/base.html:40
+msgid "Log Out"
+msgstr "Salir"
+
+#: britishdenim/templates/britishdenim/base.html:41
+msgid "Log In"
+msgstr "Ingresar"
+
+#: britishdenim/templates/britishdenim/base.html:42
+msgid "Not Registered? Sign In"
+msgstr "Nuevo? Resgistrate"
+
+#: britishdenim/templates/britishdenim/base.html:44
+#, python-format
+msgid "%(logout)s"
+msgstr ""
+
+#: britishdenim/templates/britishdenim/base.html:46
+#, python-format
+msgid "%(login)s"
+msgstr ""
+
+#: britishdenim/templates/britishdenim/base.html:49
+#, python-format
+msgid "%(register)s"
+msgstr ""
+
+#: britishdenim/templates/britishdenim/contact.html:14
+msgid "Contact us"
+msgstr "Contáctanos"
+
+#: britishdenim/templates/britishdenim/contact.html:15
+msgid ""
+"Have an enquiry or would like to give us feedback?<br>Fill out the form "
+"below to contact our team."
+msgstr ""
+"Tienes alguna duda o pregunta?<br>Llena el formulario y contacta a nuestro "
+"equipo."
+
+#: britishdenim/templates/britishdenim/contact.html:17
+msgid "Your name"
+msgstr "Tu nombre"
+
+#: britishdenim/templates/britishdenim/contact.html:18
+msgid "Your email address"
+msgstr "Tu correo"
+
+#: britishdenim/templates/britishdenim/contact.html:19
+msgid "Your message"
+msgstr "Tu mensaje"
+
+#: britishdenim/templates/britishdenim/contact.html:21
+msgid "Send"
+msgstr "Enviar"
