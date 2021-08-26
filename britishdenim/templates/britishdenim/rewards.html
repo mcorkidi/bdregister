@@ -1,0 +1,25 @@
+{% extends "britishdenim/base.html" %}
+{% block body %} 
+{% load static %}
+
+<h1>This is rewards</h1>
+
+{% for coupon in coupons %} 
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="container"> 
+
+        <div class="card text-center" style="width: 18rem;">
+            <img src="{{ coupon.image.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{coupon.issuer}}</h5>
+                <p class="card-text">{{coupon.details}} <br>
+                <a href="{{coupon.link}}" target="_blank">More Info</a> <br> Expires on: {{coupon.expirationDate}}</p>
+                <a href="#" class="btn btn-primary">Claim</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %} 

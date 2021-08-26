@@ -1,7 +1,6 @@
 from django.db import models
-from django.db.models.fields import DateField
 from django.contrib.auth.models import User
-
+from django.utils import timezone
 
 
 
@@ -25,6 +24,9 @@ class Consumer(models.Model):
     country = models.CharField(max_length=100, default="")
     city = models.CharField(max_length=100, default="")
     getInfo = models.BooleanField(default = True)
+
+    def __str__(self):
+        return self.sku
     
 class Scan(models.Model):
     sku = models.ForeignKey(Item,on_delete=models.CASCADE)
@@ -32,6 +34,21 @@ class Scan(models.Model):
     when = models.CharField(max_length=100, default="")
     country = models.CharField(max_length=100, default="")
     city = models.CharField(max_length=100, default="")
+
+    def __str__(self):
+        return self.sku
+    
+class Coupon(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    issuer = models.CharField(max_length=100, default="")
+    city = models.CharField(max_length=100, default='')
+    country = models.CharField(max_length=100, default='')
+    creationDate = models.DateTimeField(auto_now_add=True)
+    expirationDate = models.DateTimeField(default= timezone.now())
+    details = models.TextField(default="")
+    image = models.ImageField(default='coupon.jpg', upload_to='coupon_images')
+    industry = models.CharField(max_length=100, default='')
+    link = models.URLField(default='')
     
 
       

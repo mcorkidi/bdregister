@@ -126,6 +126,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
+MEDIA_ROOT= os.path.join(BASE_DIR, 'images')
+MEDIA_URL='/images/'
+
 LOGIN_REDIRECT_URL = "index"
 LOGIN_URL = 'login'
 

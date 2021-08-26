@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Item, Consumer, Scan
+from .models import Item, Consumer, Scan, Coupon
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from datetime import datetime
@@ -101,9 +101,14 @@ def register(request, sku):
     if sku == '_':
         pass
     else:
-        item=items.get(sku=sku)
-        newScan = Scan(sku=item,where=where,when=when,country=country,city=city)
-        newScan.save()
+        try: 
+            item=items.get(sku=sku)
+            newScan = Scan(sku=item,where=where,when=when,country=country,city=city)
+            newScan.save()
+        except:
+            pass
+
+    city = city.replace(" ", "_")    
     context = {'sku': sku, 'city': city}  
 
     return render(request, 'britishdenim/registration.html', context)
@@ -111,6 +116,12 @@ def register(request, sku):
 def contact(request):
 
     return render(request, 'britishdenim/contact.html')
+
+def rewards(request):
+
+    coupons = Coupon.objects.all()
+
+    return render(request, 'britishdenim/rewards.html', {'coupons': coupons})
 
 
 
