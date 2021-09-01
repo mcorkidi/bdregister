@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Item, Consumer, Scan, Coupon
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.utils.translation import gettext as _
@@ -117,6 +118,7 @@ def contact(request):
 
     return render(request, 'britishdenim/contact.html')
 
+@login_required
 def rewards(request):
 
     coupons = Coupon.objects.all()

@@ -27,6 +27,9 @@ def signin(request):
             form.save()
             
             return redirect('login')
+        else:
+            messages.error(request, "Wrong information please try again.")
+            
     else:
         form = SigninForm()
     return render(request, 'user/signin.html', {'form':form})
