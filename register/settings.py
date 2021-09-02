@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['www.britishdenimlatam.com', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
     'britishdenim.apps.BritishdenimConfig',
+    'drf_yasg'
+
 ]
 
 MIDDLEWARE = [
