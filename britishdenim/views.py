@@ -9,7 +9,7 @@ from django.utils.translation import gettext as _
 from django.views import View
 from rest_framework import viewsets, mixins, status
 from rest_framework.authentication import SessionAuthentication
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.response import Response
 from .serializers import ItemSerializer, LoginSerializer, LogoutSerializer
 
@@ -143,11 +143,11 @@ class ProductViewSet(viewsets.GenericViewSet):
     def create(self,request):
     # Override create method to prevent duplicate object creation
         serializer = self.serializer_class(data=self.request.data)
-        print(request.data)
+
         serializer.is_valid(raise_exception=True)
         sku = serializer.validated_data['sku']
         name = serializer.validated_data['name']
-        obj, created = Item.objects.get_or_create(sku=sku)
+        obj, created = Item.objects.get_or_create(sku=sku, name=name)
         if created:
             obj.save()
             return Response(status=status.HTTP_201_CREATED)

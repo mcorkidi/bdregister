@@ -1,0 +1,13 @@
+.DS_Store
+*.DS_Store
+britishdenim/.DS_Store
+britishdenim/locale/.DS_Store
+britishdenim/locale/es/.DS_Store
+britishdenim/static/.DS_Store
+britishdenim/static/britishdenim/.DS_Store
+britishdenim/templates/.DS_Store
+images/.DS_Store
+register/.DS_Store
+register/__pycache__/settings.cpython-38.pyc
+user/.DS_Store
+user/templates/.DS_Store
