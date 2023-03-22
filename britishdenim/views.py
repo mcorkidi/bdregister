@@ -136,7 +136,7 @@ def rewards(request):
 
 class ProductViewSet(viewsets.GenericViewSet):
     authentication_classes = [SessionAuthentication]
-    permission_classes = [IsAdminUser]
+    permission_classes = [AllowAny]
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
 

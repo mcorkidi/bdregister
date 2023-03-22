@@ -11,3 +11,4 @@ register/.DS_Store
 register/__pycache__/settings.cpython-38.pyc
 user/.DS_Store
 user/templates/.DS_Store
+db.sqlite3
