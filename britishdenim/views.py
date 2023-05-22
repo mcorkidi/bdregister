@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.utils.translation import gettext as _
-
+from django.contrib import messages
 from django.views import View
 from rest_framework import viewsets, mixins, status
 from rest_framework.authentication import SessionAuthentication
@@ -93,6 +93,9 @@ def register(request, sku):
             user = request.user
             pass
         else:
+            if User.objects.filter(email=email).exists():
+                messages.error(request, 'Error: Correo ya registrado, intenta nuevamente con otro correo.')
+                return render(request, 'britishdenim/registration.html')
             user = User.objects.create_user(username,email,password)
             user.first_name = first_name
             user.last_name = last_name
