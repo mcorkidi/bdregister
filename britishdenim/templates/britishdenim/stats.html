@@ -3,4 +3,10 @@
 {% load static %}
 
 Total Scans: {{totalScans}}
+
+{% for country, scans in scansByCountry.items %} 
+{{country}}-{{scans}}
+{%endfor%} 
+
+
 {%endblock%}

@@ -143,7 +143,16 @@ def rewards(request):
 def stats(request):
     scans = Scan.objects.all()
     totalScans = scans.count()
-    context = {'totalsScans': totalScans}
+    scansByCountry = {}
+    for scan in scans:
+        if scan.country in scansByCountry:
+            scansByCountry[scan.country] += 1
+        else:
+            scansByCountry[scan.country] = 1
+    
+    print(scansByCountry)
+    context = {'totalScans': totalScans, 'scansByCountry': scansByCountry}
+   
     return render(request, 'britishdenim/stats.html', context)
 
 # API VIEWS
