@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Item, Consumer, Scan, Coupon
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.utils.translation import gettext as _
@@ -137,6 +138,13 @@ def rewards(request):
     coupons = Coupon.objects.all()
 
     return render(request, 'britishdenim/rewards.html', {'coupons': coupons})
+
+@staff_member_required
+def stats(request):
+    scans = Scan.objects.all()
+    totalScans = scans.count()
+    context = {'totalsScans': totalScans}
+    return render(request, 'britishdenim/stats.html', context)
 
 # API VIEWS
 
