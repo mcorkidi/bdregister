@@ -10,8 +10,8 @@ class Item(models.Model):
     sku = models.CharField(max_length=200)
     name = models.CharField(max_length=200, default="")
 
-    def __str__(self):
-        return self.sku
+        # def __str__(self):
+        #     return self.sku
 
 
 
@@ -25,8 +25,8 @@ class Consumer(models.Model):
     city = models.CharField(max_length=100, default="")
     getInfo = models.BooleanField(default = True)
 
-    def __str__(self):
-        return self.sku
+    # def __str__(self):
+    #     return self.sku
     
 class Scan(models.Model):
     sku = models.ForeignKey(Item,on_delete=models.CASCADE)

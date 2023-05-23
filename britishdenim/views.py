@@ -114,8 +114,11 @@ def register(request, sku):
     else:
         try: 
             item=items.get(sku=sku)
-            newScan = Scan(sku=item,where=where,when=when,country=country,city=city)
-            newScan.save()
+            if country=='HK' or country=='CN':
+                pass
+            else:
+                newScan = Scan(sku=item,where=where,when=when,country=country,city=city)
+                newScan.save()
         except:
             pass
 
