@@ -3,29 +3,69 @@
 {% load static %}
 {% load i18n %}
 
-<div class="pt-5"></div>
-<div class="d-flex justify-content-center">
-    <div class="container-contact d-flex justify-content-center">
-        <div class="row my-2 mx-2">
-            <div class="col-md-6"> 
-                <img src="{% static '/britishdenim/images/contactus.jpg' %}" alt="IMG" width="85%" height="80%" padding-left="50" padding-top="110"> </div>
-            <!--col-->
-            <div class="col-md-6">
-                <h2 class="form-title">{% translate "Contact us" %}</h2>
-                <p class="justify text-muted">{% translate "Have an enquiry or would like to give us feedback?<br>Fill out the form below to contact our team." %} </p>
-                <form>
-                    <div class="form-group pt-2 pl-1"> <label for="exampleInputName">{% translate "Your name" %}</label> <input type="text" class="form-control" id="exampleInputName"> </div>
-                    <div class="form-group pl-1"> <label for="exampleInputEmail1">{% translate "Your email address" %}</label> <input type="email" class="form-control" id="exampleInputEmail1"> </div>
-                    <div class="form-group pl-1"> <label for="exampleFormControlTextarea1">{% translate "Your message" %}</label> <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea> </div>
-                    <div class="row">
-                        <div class="col-md-3 offset-md-9"><button type="submit" class="btn-contact btn-primary">{% translate "Send" %}</button></div>
-                    </div>
-                </form>
-            </div>
-            <!--col-->
+<div class="hero-wrap hero-bread" style="background-image: url({% static 'britishdenim/images/bg_6.jpg' %});">
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-center">
+        <div class="col-md-9 ftco-animate text-center">
+            <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">INICIO</a></span> <span>Contacto</span></p>
+          <h1 class="mb-0 bread">Contacto</h1>
         </div>
-        <!--row-->
+      </div>
     </div>
-</div>
+  </div>
+
+  <section class="ftco-section contact-section bg-light">
+    <div class="container">
+        <div class="row d-flex mb-5 contact-info">
+        <div class="w-100"></div>
+        <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <p><span>Direccion:</span> Calle 15 1/2, Ave St Isabel, Zona Libre de Colon, Panama</p>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <p><span>Telefono:</span> <a href="tel://1234567920">+507-433-9200</a></p>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <p><span>Correo:</span> <a href="mailto:info@yoursite.com">info@epcotsa.com/a></p>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex">
+            <div class="info bg-white p-4">
+              <p><span>Pagina</span> <a href="#">britishdenimlatam.com</a></p>
+            </div>
+        </div>
+      </div>
+      <div class="row block-9">
+        <div class="col-md-6 order-md-last d-flex">
+          <form action="#" class="bg-white p-5 contact-form">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Tu Nombre">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Tu Correo ">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Asunto">
+            </div>
+            <div class="form-group">
+              <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Mensage"></textarea>
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Enviar" class="btn btn-primary py-3 px-5">
+            </div>
+          </form>
+        
+        </div>
+
+        <div class="col-md-6 d-flex">
+            <div id="map" class="bg-white"></div>
+        </div>
+      </div>
+    </div>
+  </section> 
 
 {%endblock%}
