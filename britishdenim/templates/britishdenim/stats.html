@@ -64,6 +64,41 @@
         </div>
     </div>
 
+    <br>
+    <div class="row">
+        <div class="animated fadeIn">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Top 20 Scanned Items</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="pre-scrollable">
+                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>SKU</th>
+                                        <th>Scans</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for sku, scans in scansByItem.items %} 
+                                    <tr>
+                                        <td>{{sku}}</td>
+                                        <td>{{scans}}</td>
+                                    </tr>
+                                    {%endfor%} 
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {%endblock%}

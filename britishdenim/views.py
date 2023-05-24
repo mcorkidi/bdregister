@@ -167,10 +167,18 @@ def stats(request):
             scansByCountry[country] = 1
     
     scansByCountry = dict(sorted(scansByCountry.items(), key=lambda x: x[1], reverse=True))
+    scansByItem = {}
+    for item in scans:
+        if item.sku.sku in scansByItem:
+            scansByItem[item.sku.sku] += 1 
+        else:
+            scansByItem[item.sku.sku] = 1
+    scansByItem = dict(sorted(scansByItem.items(), key=lambda x: x[1], reverse=True)[:20])
     context = {'totalScans': totalScans, 
                'scansByCountry': scansByCountry,
                'totalUsers': totalUsers, 
-               'totalItems': totalItems}
+               'totalItems': totalItems, 
+               'scansByItem' : scansByItem}
    
     return render(request, 'britishdenim/stats.html', context)
 
