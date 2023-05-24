@@ -195,14 +195,14 @@ def charts(request):
         try: 
             dateScanned = datetime.strptime(scan.when, date_format)
             monthYear = dateScanned.strftime("%m-%Y")
-            print(monthYear)
+           
             if dateScanned.date() > aYearAgo:
                 if monthYear in scansLast12Months:
                     scansLast12Months[monthYear] += 1
                 else:
                     scansLast12Months[monthYear] = 1
         except Exception as e:
-            print(e)
+            pass
     months = json.dumps(list(scansLast12Months.keys()))
     values = json.dumps(list(scansLast12Months.values()))
     context = {'scansLast12Months' : scansLast12Months, 'months' : months, 'values':values}
