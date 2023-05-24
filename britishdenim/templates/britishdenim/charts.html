@@ -47,7 +47,7 @@ var myChart = new Chart( ctx, {
         type: 'line',
         defaultFontFamily: 'Montserrat',
         datasets: [ {
-            label: "Foods",
+            label: "Scans",
             data: JSON.parse("{{values|safe}}"),
             backgroundColor: 'transparent',
             borderColor: 'rgba(220,53,69,0.75)',
@@ -99,7 +99,7 @@ var myChart = new Chart( ctx, {
                 },
                 scaleLabel: {
                     display: true,
-                    labelString: 'Value'
+                    labelString: 'Scans'
                 }
                     } ]
         },
