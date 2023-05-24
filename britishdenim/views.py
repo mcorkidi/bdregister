@@ -179,7 +179,7 @@ def stats(request):
                'totalUsers': totalUsers, 
                'totalItems': totalItems, 
                'scansByItem' : scansByItem}
-   
+    
     return render(request, 'britishdenim/stats.html', context)
 
 # API VIEWS
