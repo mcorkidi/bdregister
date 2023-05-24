@@ -13,6 +13,7 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.response import Response
 from .serializers import ItemSerializer, LoginSerializer, LogoutSerializer
+import pycountry
 
 def ipInfo(addr=''):
     from urllib.request import urlopen
@@ -139,19 +140,37 @@ def rewards(request):
 
     return render(request, 'britishdenim/rewards.html', {'coupons': coupons})
 
+def get_country_name(country_code):
+    try:
+        country = pycountry.countries.get(alpha_2=country_code)
+        if country:
+            return country.name
+    except LookupError:
+        pass
+    return None
+
+
 @staff_member_required
 def stats(request):
     scans = Scan.objects.all()
+    users = User.objects.all().filter()
+    items = Item.objects.all()
+    totalItems = items.count()
+    totalUsers = users.count()
     totalScans = scans.count()
     scansByCountry = {}
     for scan in scans:
-        if scan.country in scansByCountry:
-            scansByCountry[scan.country] += 1
+        country = get_country_name(scan.country)
+        if country in scansByCountry:
+            scansByCountry[country] += 1
         else:
-            scansByCountry[scan.country] = 1
+            scansByCountry[country] = 1
     
     print(scansByCountry)
-    context = {'totalScans': totalScans, 'scansByCountry': scansByCountry}
+    context = {'totalScans': totalScans, 
+               'scansByCountry': scansByCountry,
+               'totalUsers': totalUsers, 
+               'totalItems': totalItems}
    
     return render(request, 'britishdenim/stats.html', context)
 
