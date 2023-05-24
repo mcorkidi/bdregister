@@ -2,8 +2,22 @@
 {% block body %} 
 {% load static %}
 
-
 <div class="container">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'stats' %}">Stats</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'charts' %}">Charts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li>
+    </ul>
+    <br>
     <div class="animated fadeIn">
 
         <h5 class="heading-title mb-1 text-secondary"></h5>
@@ -98,6 +112,7 @@
             </div>
         </div>
     </div>
+    
 
 </div>
 

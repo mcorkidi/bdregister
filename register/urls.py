@@ -59,6 +59,7 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('rewards/', views.rewards, name= 'rewards'),
     path('stats/', views.stats, name= 'stats'),
+    path('charts/', views.charts, name= 'charts'),
     path('doc', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
 
