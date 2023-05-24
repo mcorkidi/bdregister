@@ -166,7 +166,7 @@ def stats(request):
         else:
             scansByCountry[country] = 1
     
-    print(scansByCountry)
+    scansByCountry = dict(sorted(scansByCountry.items(), key=lambda x: x[1], reverse=True))
     context = {'totalScans': totalScans, 
                'scansByCountry': scansByCountry,
                'totalUsers': totalUsers, 
