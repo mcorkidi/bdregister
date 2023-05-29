@@ -270,6 +270,10 @@ def charts(request):
                'itemList': itemsWithMonthly}
     return render(request, 'britishdenim/charts.html', context)
 
+def consumer(request):
+
+    context = {}
+    return render(request, 'britishdenim/consumer.html', context)
 
 # API VIEWS
 

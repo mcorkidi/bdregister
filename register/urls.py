@@ -47,7 +47,8 @@ app_name = 'britishdenim'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('accounts/', include('rest_framework.urls')),
+    # path('accounts/', include('rest_framework.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     # path('auth/login/', views.LoginView.as_view(), name='loginView'),
     # path('auth/logout/', views.LogOutView, name='logoutView'),
     path('register/<sku>', views.register, name='register' ),
@@ -60,6 +61,7 @@ urlpatterns = [
     path('rewards/', views.rewards, name= 'rewards'),
     path('stats/', views.stats, name= 'stats'),
     path('charts/', views.charts, name= 'charts'),
+    path('consumer/', views.consumer, name= 'consumer'),
     path('doc', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
 

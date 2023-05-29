@@ -11,7 +11,7 @@
           <a class="nav-link active" href="{% url 'charts' %}">Charts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="{% url 'consumer' %}">Consumer</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
@@ -30,22 +30,27 @@
             </div>
         </div><!-- /# column -->
     </div>
+    <hr>
     <div class="row">
     <h5 class="text-secondary">Top 20 Scanned Items last 12 months</h5>
     </div>
-    {% for key, value in itemList.items %}
+    
     <div class="row">
-        <div class="col-lg-12">
+        {% for key, value in itemList.items %}
+        <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
                     <h4 class="mb-3">Scans for {{key}}</h4>
                     <canvas id="{{key}}"></canvas>
                 </div>
             </div>
+            <br>
         </div><!-- /# column -->
+        {% endfor %}
+
     </div>
 
-    {% endfor %}
+    
 </div>
 
 
