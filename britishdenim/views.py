@@ -15,6 +15,7 @@ from rest_framework.response import Response
 from .serializers import ItemSerializer, LoginSerializer, LogoutSerializer
 import pycountry
 import json
+from django.views.decorators.cache import cache_page
 
 def ipInfo(addr=''):
     from urllib.request import urlopen
@@ -150,7 +151,7 @@ def get_country_name(country_code):
         pass
     return None
 
-
+@cache_page(60 * 15)
 @staff_member_required
 def stats(request):
     scans = Scan.objects.all()
@@ -183,7 +184,8 @@ def stats(request):
     
     return render(request, 'britishdenim/stats.html', context)
 
-
+@cache_page(60 * 15)
+@staff_member_required
 def charts(request):
     scans = Scan.objects.all()
     scansLast12Months = {}
@@ -205,7 +207,67 @@ def charts(request):
             pass
     months = json.dumps(list(scansLast12Months.keys()))
     values = json.dumps(list(scansLast12Months.values()))
-    context = {'scansLast12Months' : scansLast12Months, 'months' : months, 'values':values}
+
+    itemsDict = {}
+    today = datetime.now()
+    last_12_months = []
+
+    for i in range(12):
+        month = today.month - i
+        year = today.year
+
+        if month <= 0:
+            month += 12
+            year -= 1
+        month = '{:02d}'.format(month)
+        last_12_months.append(f'{month}-{year}')
+    for scan in scans:
+        try: 
+            dateScanned = datetime.strptime(scan.when, date_format)
+            monthYear = dateScanned.strftime("%m-%Y")
+            if dateScanned.date() > aYearAgo:
+                if scan.sku.sku in itemsDict:
+                    if monthYear in itemsDict[scan.sku.sku]:
+                        itemsDict[scan.sku.sku][monthYear] += 1
+                    else:
+                        itemsDict[scan.sku.sku][monthYear] = 1
+                else:
+                    itemsDict[scan.sku.sku] = {monthYear: 1}
+        except Exception as e:
+            print('error', e)
+            pass
+    
+
+    top20Scaned = {}
+    for item in scans:
+        if datetime.strptime(item.when, date_format).date() > aYearAgo:
+            if item.sku.sku in top20Scaned:
+                top20Scaned[item.sku.sku] += 1 
+            else:
+                top20Scaned[item.sku.sku] = 1
+    top20Scaned = dict(sorted(top20Scaned.items(), key=lambda x: x[1], reverse=True)[:20])
+
+    itemsWithMonthly = {}
+    for item in itemsDict:
+        if item in top20Scaned:
+            for month_year in last_12_months:
+                if item in itemsWithMonthly:
+                    itemsWithMonthly[item][month_year] = 0 
+                else:
+                    itemsWithMonthly[item]={month_year: 0}
+
+    for item, value in itemsDict.items():
+        if item in top20Scaned:
+            for month_year, scan in value.items():
+                itemsWithMonthly[item][month_year] = scan
+        # else:
+        #     del itemsWithMonthly[item]
+    itemsWithMonthlyJson = json.dumps(list(itemsWithMonthly.keys()))
+ 
+
+    context = {'scansLast12Months' : scansLast12Months, 'months' : months, 
+               'values':values, 'items': itemsWithMonthlyJson, 
+               'itemList': itemsWithMonthly}
     return render(request, 'britishdenim/charts.html', context)
 
 
