@@ -18,7 +18,47 @@
         </li>
     </ul>
     <br>
+ 
+      
+  
 
+
+    <div class="row">
+        <div class="animated fadeIn">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Users with Registered Items - {{count}}</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="pre-scrollable">
+                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Name</th>
+                                        <th>Country</th>
+                                        <th>Items</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for user, skus in consumers.items %}
+                                    <tr>
+                                        <td>{{user.user_id.username}}</td>
+                                        <td>{{user.user_id.first_name}} {{user.user_id.last_name}}</td>
+                                        <td>{{user.country}}</td>
+                                        <td>{% for sku in skus %}{{sku.sku}} {%endfor%} </td>
+                                    </tr>
+                                    {%endfor%} 
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 </div>
 
