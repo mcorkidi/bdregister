@@ -270,9 +270,17 @@ def charts(request):
                'itemList': itemsWithMonthly}
     return render(request, 'britishdenim/charts.html', context)
 
+@staff_member_required()
 def consumer(request):
-
-    context = {}
+    consumer = Consumer.objects.all().order_by('country')
+    consumers = {}
+    for c in consumer:
+        if c.user_id.username in consumers:
+            consumers[c].append(c.sku)
+        else:
+            consumers[c] = [c.sku]
+    count = consumer.count()
+    context = {'consumers':consumers, 'count':count}
     return render(request, 'britishdenim/consumer.html', context)
 
 # API VIEWS
