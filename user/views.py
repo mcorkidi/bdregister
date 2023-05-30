@@ -14,8 +14,64 @@ def profile(request):
 
     items = Item.objects.all()
     consumer = Consumer.objects.filter(user_id=request.user)
+    profileModel = Profile.objects.first()
+    profile = Profile.objects.filter(user=request.user)[0]
+    if request.method == 'POST':
+        if 'edit' in request.POST:
+            username = request.POST.get('username')
+            email =request.POST.get('email')
+            password = request.POST.get('password')
+            password1 = request.POST.get('password1')
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            telephone = request.POST.get('telephone')
+            movil = request.POST.get('movil')
+            direccion = request.POST.get('direccion')
+            location = request.POST.get('pais')
 
-    context = {'items': items, 'consumer': consumer}
+            if password == '' and password1 == '':
+                editUser = request.user
+                editUser.username = username
+                editUser.email = email
+                editUser.first_name = first_name
+                editUser.last_name = last_name
+                editUser.save()
+                if Profile.objects.filter(user=editUser).exists():
+                    editProfile = Profile.objects.get(user=editUser)
+                    editProfile.telephone = telephone
+                    editProfile.movil = movil
+                    editProfile.location = location
+                    editProfile.direccion = direccion
+                    editProfile.save()
+                    profile = editProfile
+                    messages.success(request, 'Perfil editado exitosamente!')
+                else:
+                    newProfile = Profile.objects.create(user=editUser,
+                                                        telephone = telephone, 
+                                                        movil = movil,
+                                                        location = location,
+                                                        direccion = direccion,
+                                                        )
+                    newProfile.save()
+            else:
+                if password != password1:
+                    messages.error(request, 'Error, revisa que la contraseña sea igual a la confirmacion.')
+                else:
+                    editUser = request.user
+                    editUser.username = username
+                    editUser.email = email
+                    editUser.first_name = first_name
+                    editUser.last_name = last_name
+                    editUser.set_password(password)
+                    editUser.save()
+                    editProfile = Profile.objects.get(user=editUser)
+                    editProfile.telephone = telephone
+                    
+                    editProfile.save()
+                    messages.success(request, 'Perfil editado exitosamente!')
+                    profile = editProfile
+
+    context = {'items': items, 'consumer': consumer, 'profile':profile, 'profileModel':profileModel}
 
     return render(request, 'user/profile.html', context)
 

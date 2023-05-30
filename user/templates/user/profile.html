@@ -4,6 +4,103 @@
 
 <div class="container"> 
     <section style="background-color: #eee;">
+        <!-- MODAL WINDOW EDIT PROFILE -->
+        <div id="staticBackdrop" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content p-3">
+                    
+    
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>   
+                            <form method="post">
+                                {% csrf_token %}
+                                <h2>Editar Perfil</h2>
+                                <div class="row">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Usuario</span>
+                                        <input type="text" name="username" value="{{ user.username }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Cambiar Contraseña</span>
+                                        <input type="password" name="password" autocomplete="new-password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Confirmar Contraseña</span>
+                                        <input type="password" name="password1" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="inputGroup-sizing-default">Nombre</span>
+                                            <input type="text" name="first_name" value="{{ user.first_name }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="inputGroup-sizing-default">Apellido</span>
+                                            <input type="text"name="last_name" value="{{ user.last_name }}"class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Telefono</span>
+                                        <input type="tel" name="telephone" value="{{ profile.telephone }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Movil</span>
+                                        <input type="tel" name="movil" value="{{ profile.movil }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+                                        <input type="email" name="email" value="{{ user.email }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="inputGroup-sizing-default">Direccion</span>
+                                            <input type="text" name="direccion" value="{{ profile.direccion }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="input-group mb-3" >
+                                            <select class="form-select" id="inputGroupSelect03" name="pais">
+                                                <option selected>Selecciona...</option>
+                                                {% for choice in profileModel.countries %}
+                                                <option value="{{choice.0}}">{{choice.1}}</option>
+                                                {% endfor %} 
+                                            
+                                            
+                                            </select>
+                                            <label class="input-group-text" for="inputGroupSelect03">Pais</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                               
+                                
+                               
+                                <div class="d-flex justify-content-end">
+                                <button class="btn btn-primary" type="submit" name="edit">Guardar</button>
+                                </div>
+                            </form>
+    
+                            
+                </div>
+            </div>
+        </div>
+        <!-- END OF MODAL  -->
         <div class="row">
             <div class="col-lg-4">
             <div class="card mb-4">
@@ -12,35 +109,41 @@
                     class="rounded-circle img-fluid" style="width: 150px;">
                 <h5 class="my-3">{{ user.first_name}} {{user.last_name}}</h5>
                 <p class="text-muted mb-1">British Denim Fan</p>
-                <p class="text-muted mb-4">Location</p>
+                <p class="text-muted mb-4">{{profile.location}}</p>
                 <!-- <div class="d-flex justify-content-center mb-2">
                     <button type="button" class="btn btn-primary">Follow</button>
                     <button type="button" class="btn btn-outline-primary ms-1">Message</button>
                 </div> -->
                 </div>
             </div>
+            
             <div class="card mb-4 mb-lg-0">
                 <div class="card-body p-0">
                 <ul class="list-group list-group-flush rounded-3">
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <i class="fas fa-globe fa-lg text-warning"></i>
-                    <p class="mb-0">https://mdbootstrap.com</p>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                    <p class="mb-0">mdbootstrap</p>
-                    </li>
+                    
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                     <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                    <p class="mb-0">@mdbootstrap</p>
+                    {% if profile.tw_link == None %}
+                    None 
+                    {%else%} 
+                    <a href="{{profile.tw_link}}" target="_blank" rel="noopener noreferrer"><p class="mb-0">{{profile.tw_link}}</p></a>
+                    {%endif%} 
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                     <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                    <p class="mb-0">mdbootstrap</p>
+                    {% if profile.ig_link == None %}
+                    None 
+                    {%else%} 
+                    <a href="{{profile.ig_link}}" target="_blank" rel="noopener noreferrer"><p class="mb-0">{{profile.ig_link}}</p></a>
+                    {%endif%}
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                     <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                    <p class="mb-0">mdbootstrap</p>
+                    {% if profile.fb_link == None %}
+                    None 
+                    {%else%} 
+                    <a href="{{profile.fb_link}}" target="_blank" rel="noopener noreferrer"><p class="mb-0">{{profile.fb_link}}</p></a>
+                    {%endif%} 
                     </li>
                 </ul>
                 </div>
@@ -49,50 +152,66 @@
             <div class="col-lg-8">
             <div class="card mb-4">
                 <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-3">
-                    <p class="mb-0">Nombre</p>
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <p class="mb-0">Nombre</p>
+                        </div>
+                        <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ user.first_name}} {{user.last_name}}</p>
+                        </div>
                     </div>
-                    <div class="col-sm-9">
-                    <p class="text-muted mb-0">{{ user.first_name}} {{user.last_name}}</p>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <p class="mb-0">Correo</p>
+                        </div>
+                        <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{user.username}}</p>
+                        </div>
                     </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-3">
-                    <p class="mb-0">Correo</p>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <p class="mb-0">Telefono</p>
+                        </div>
+                        <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{profile.telephone}}</p>
+                        </div>
                     </div>
-                    <div class="col-sm-9">
-                    <p class="text-muted mb-0">{{user.username}}</p>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <p class="mb-0">Movil</p>
+                        </div>
+                        <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{profile.movil}}</p>
+                        </div>
                     </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-3">
-                    <p class="mb-0">Telefono</p>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <p class="mb-0">Direccion</p>
+                        </div>
+                        <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{profile.direccion}}</p>
+                        </div>
+                        
                     </div>
-                    <div class="col-sm-9">
-                    <p class="text-muted mb-0">(097) 234-5678</p>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Pais</p>
+                            </div>
+                            <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{profile.location}}</p>
+                        </div>
                     </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-3">
-                    <p class="mb-0">Movil</p>
+                    <hr>
+                    <div class="row">
+                        
+                        <a class="btn btn-primary ml-auto" data-toggle="modal" data-target="#staticBackdrop" id="edit" name="edit">Editar</a>
+                        
                     </div>
-                    <div class="col-sm-9">
-                    <p class="text-muted mb-0">(098) 765-4321</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-3">
-                    <p class="mb-0">Direccion</p>
-                    </div>
-                    <div class="col-sm-9">
-                    <p class="text-muted mb-0">Direccion</p>
-                    </div>
-                </div>
                 </div>
             </div>
             <div class="row">
@@ -117,6 +236,10 @@
         </div>
         </div>
     </section>
+
+    
+
+
 </div>
 
   {% endblock %}
