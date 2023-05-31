@@ -225,17 +225,17 @@
                                                 <th>Fecha Escaneada</th>
                                             </thead>
 
-                                        </table>
-                                        <tbody>
-                                            {% for i in consumer %}
-                                            <tr>
-                                                    <td>{{ i.sku.sku}}</td>
-                                                    <td>{{i.sku.name}}</td>
-                                                    <td>{{ i.sku.when}}</td>
-                                            </tr>
-                                            {%endfor%}
-                                        </tbody>
                                         
+                                            <tbody>
+                                                {% for i in consumer %}
+                                                <tr>
+                                                        <td>{{ i.sku.sku}}</td>
+                                                        <td>{{i.sku.name}}</td>
+                                                        <td>{{ i.when}}</td>
+                                                </tr>
+                                                {%endfor%}
+                                            </tbody>
+                                        </table>
                                         
                                     </div>
                             </div>
