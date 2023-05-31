@@ -88,9 +88,6 @@
                                     </div>
                                 </div>
                                 
-                               
-                                
-                               
                                 <div class="d-flex justify-content-end">
                                 <button class="btn btn-primary" type="submit" name="edit">Guardar</button>
                                 </div>
@@ -103,135 +100,149 @@
         <!-- END OF MODAL  -->
         <div class="row">
             <div class="col-lg-4">
-            <div class="card mb-4">
-                <div class="card-body text-center">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                    class="rounded-circle img-fluid" style="width: 150px;">
-                <h5 class="my-3">{{ user.first_name}} {{user.last_name}}</h5>
-                <p class="text-muted mb-1">British Denim Fan</p>
-                <p class="text-muted mb-4">{{profile.location}}</p>
-                <!-- <div class="d-flex justify-content-center mb-2">
-                    <button type="button" class="btn btn-primary">Follow</button>
-                    <button type="button" class="btn btn-outline-primary ms-1">Message</button>
-                </div> -->
-                </div>
-            </div>
-            
-            <div class="card mb-4 mb-lg-0">
-                <div class="card-body p-0">
-                <ul class="list-group list-group-flush rounded-3">
-                    
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                    {% if profile.tw_link == None %}
-                    None 
-                    {%else%} 
-                    <a href="{{profile.tw_link}}" target="_blank" rel="noopener noreferrer"><p class="mb-0">{{profile.tw_link}}</p></a>
-                    {%endif%} 
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                    {% if profile.ig_link == None %}
-                    None 
-                    {%else%} 
-                    <a href="{{profile.ig_link}}" target="_blank" rel="noopener noreferrer"><p class="mb-0">{{profile.ig_link}}</p></a>
-                    {%endif%}
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                    {% if profile.fb_link == None %}
-                    None 
-                    {%else%} 
-                    <a href="{{profile.fb_link}}" target="_blank" rel="noopener noreferrer"><p class="mb-0">{{profile.fb_link}}</p></a>
-                    {%endif%} 
-                    </li>
-                </ul>
-                </div>
-            </div> 
-            </div>
-            <div class="col-lg-8">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-3">
-                        <p class="mb-0">Nombre</p>
-                        </div>
-                        <div class="col-sm-9">
-                        <p class="text-muted mb-0">{{ user.first_name}} {{user.last_name}}</p>
-                        </div>
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                        class="rounded-circle img-fluid" style="width: 150px;">
+                    <h5 class="my-3">{{ user.first_name}} {{user.last_name}}</h5>
+                    <p class="text-muted mb-1">British Denim Fan</p>
+                    <p class="text-muted mb-4">{{profile.location}}</p>
+                    <!-- <div class="d-flex justify-content-center mb-2">
+                        <button type="button" class="btn btn-primary">Follow</button>
+                        <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                    </div> -->
                     </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                        <p class="mb-0">Correo</p>
-                        </div>
-                        <div class="col-sm-9">
-                        <p class="text-muted mb-0">{{user.username}}</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                        <p class="mb-0">Telefono</p>
-                        </div>
-                        <div class="col-sm-9">
-                        <p class="text-muted mb-0">{{profile.telephone}}</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                        <p class="mb-0">Movil</p>
-                        </div>
-                        <div class="col-sm-9">
-                        <p class="text-muted mb-0">{{profile.movil}}</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                        <p class="mb-0">Direccion</p>
-                        </div>
-                        <div class="col-sm-9">
-                        <p class="text-muted mb-0">{{profile.direccion}}</p>
-                        </div>
-                        
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Pais</p>
-                            </div>
-                            <div class="col-sm-9">
-                            <p class="text-muted mb-0">{{profile.location}}</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        
-                        <a class="btn btn-primary ml-auto" data-toggle="modal" data-target="#staticBackdrop" id="edit" name="edit">Editar</a>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                <div class="card mb-4 mb-md-0">
-                    <div class="card-body">
-                    <p class="mb-4"><span class="text-primary font-italic me-1">scanned</span> Items
-                    </p>
-                    
-                        {% for i in consumer %}
-
-                        <p class="mb-1" style="font-size: .77rem;">{{ i.sku}} - {{i.sku.name}}</p>
-                        <br>
-                        {%endfor%}
-                    
-                    </div>
-                </div>
                 </div>
                 
+                <div class="card mb-4 mb-lg-0">
+                    <div class="card-body p-0">
+                    <ul class="list-group list-group-flush rounded-3">
+                        
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                        {% if profile.tw_link == None %}
+                        None 
+                        {%else%} 
+                        <a href="{{profile.tw_link}}" target="_blank" rel="noopener noreferrer"><p class="mb-0">{{profile.tw_link}}</p></a>
+                        {%endif%} 
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                        {% if profile.ig_link == None %}
+                        None 
+                        {%else%} 
+                        <a href="{{profile.ig_link}}" target="_blank" rel="noopener noreferrer"><p class="mb-0">{{profile.ig_link}}</p></a>
+                        {%endif%}
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                        {% if profile.fb_link == None %}
+                        None 
+                        {%else%} 
+                        <a href="{{profile.fb_link}}" target="_blank" rel="noopener noreferrer"><p class="mb-0">{{profile.fb_link}}</p></a>
+                        {%endif%} 
+                        </li>
+                    </ul>
+                    </div>
+                </div> 
             </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <p class="mb-0">Nombre</p>
+                            </div>
+                            <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{ user.first_name}} {{user.last_name}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <p class="mb-0">Correo</p>
+                            </div>
+                            <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{user.username}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <p class="mb-0">Telefono</p>
+                            </div>
+                            <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{profile.telephone}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <p class="mb-0">Movil</p>
+                            </div>
+                            <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{profile.movil}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <p class="mb-0">Direccion</p>
+                            </div>
+                            <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{profile.direccion}}</p>
+                            </div>
+                            
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Pais</p>
+                                </div>
+                                <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{profile.location}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            
+                            <a class="btn btn-primary ml-auto" data-toggle="modal" data-target="#staticBackdrop" id="edit" name="edit">Editar</a>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12   ">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4"><span class="text-primary font-italic me-1">items</span> Escaneados
+                                </p>
+                                    <div class="table-responsive" >
+                                        <table class="table table-bordered table-striped table-sm" >
+                                            <thead>
+                                                <th>Referencia</th>
+                                                <th>Descripcion</th>
+                                                <th>Fecha Escaneada</th>
+                                            </thead>
+
+                                        </table>
+                                        <tbody>
+                                            {% for i in consumer %}
+                                            <tr>
+                                                    <td>{{ i.sku.sku}}</td>
+                                                    <td>{{i.sku.name}}</td>
+                                                    <td>{{ i.sku.when}}</td>
+                                            </tr>
+                                            {%endfor%}
+                                        </tbody>
+                                        
+                                        
+                                    </div>
+                            </div>
+                        </div>
+                        </div>
+                    
+                </div>
             </div>
         </div>
         </div>

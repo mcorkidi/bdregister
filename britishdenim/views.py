@@ -192,7 +192,7 @@ def charts(request):
     today = datetime.now().date()
     date_format = "%Y-%m-%d %H:%M:%S.%f"
     aYearAgo = today -timedelta(days=30*12)
-
+# Chart for last 12 months of scans
     for scan in scans:
         try: 
             dateScanned = datetime.strptime(scan.when, date_format)
@@ -208,6 +208,7 @@ def charts(request):
     months = json.dumps(list(scansLast12Months.keys()))
     values = json.dumps(list(scansLast12Months.values()))
 
+#Charts for to 12 items scanned last 12 months
     itemsDict = {}
     today = datetime.now()
     last_12_months = []
@@ -236,8 +237,6 @@ def charts(request):
         except Exception as e:
             print('error', e)
             pass
-    
-
     top20Scaned = {}
     for item in scans:
         if datetime.strptime(item.when, date_format).date() > aYearAgo:
@@ -263,11 +262,31 @@ def charts(request):
         # else:
         #     del itemsWithMonthly[item]
     itemsWithMonthlyJson = json.dumps(list(itemsWithMonthly.keys()))
- 
+
+#Chart for last 2 weeks of scans
+    scansLast15Days = {}
+    today = datetime.now().date()
+    twoWeeksAgo = today -timedelta(days=15)
+    for scan in scans:
+        try: 
+            dateScanned = datetime.strptime(scan.when, date_format)
+            dayScan = dateScanned.strftime("%d-%m-%Y")
+           
+            if dateScanned.date() > twoWeeksAgo:
+                if dayScan in scansLast15Days:
+                    scansLast15Days[dayScan] += 1
+                else:
+                    scansLast15Days[dayScan] = 1
+        except Exception as e:
+            pass
+    days = json.dumps(list(scansLast15Days.keys()))
+    day_values = json.dumps(list(scansLast15Days.values()))
+
 
     context = {'scansLast12Months' : scansLast12Months, 'months' : months, 
                'values':values, 'items': itemsWithMonthlyJson, 
-               'itemList': itemsWithMonthly}
+               'itemList': itemsWithMonthly, 'days':days,
+               'day_values':day_values}
     return render(request, 'britishdenim/charts.html', context)
 
 @staff_member_required()

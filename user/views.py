@@ -40,7 +40,8 @@ def profile(request):
                     editProfile = Profile.objects.get(user=editUser)
                     editProfile.telephone = telephone
                     editProfile.movil = movil
-                    editProfile.location = location
+                    if location != 'Selecciona...':
+                        editProfile.location = location
                     editProfile.direccion = direccion
                     editProfile.save()
                     profile = editProfile
