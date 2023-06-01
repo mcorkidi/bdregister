@@ -75,14 +75,10 @@ def register(request, sku):
         registeredSku = request.POST.get('inputSku',"")
         email = request.POST.get('email',"")
         username = email 
-       
         password = request.POST.get('inputPassword',"")
         first_name = request.POST.get('first_name',"")
         last_name = request.POST.get('last_name',"")
-        
         city = request.POST.get('city', "city")
-        
-        
         getInfo = request.POST.get('getInfo', 'Off')
         
         if getInfo == 'on':
@@ -98,7 +94,7 @@ def register(request, sku):
             pass
         else:
             if User.objects.filter(email=email).exists():
-                messages.error(request, 'Error: Correo ya registrado, intenta nuevamente con otro correo.')
+                messages.error(request, 'Error: Correo ya registrado, ingresa a la pagina con tu correo.')
                 return render(request, 'britishdenim/registration.html')
             user = User.objects.create_user(username,email,password)
             user.first_name = first_name

@@ -4,54 +4,56 @@
 {% load static %}
 <div class="container">
         {% if user.is_authenticated %}
-    <h1>Welcome back {{user.first_name}}. Thank for being a valued customer!</h1>  
+    <h2>Bienvenido {{user.first_name}}.</h2><br> <h4>Gracias por escanear otro producto.</h4>  
     {%else%}
         {% if sku != "_" %}
-            <h1>Thank you for scanning your product. </h1>
-            <h2>Please complete the following information.</h2>
+            <h2>Gracias por escanear el codigo QR. </h2><br>
+            <h3>Por favor registrate para aprovechar de nuestras promociones.</h3>
         {% else %} 
-            <h1>Thank you for registering your product.</h1>
-            <h2>Please complete the following information.</h2>
+            <h2>Registra algun producto con su referencia.</h2><br>
+            <h3>Podras aprovechar futuras promociones.</h3>
         {%endif%}
 
     {%endif%}
-</div>
 
-<div class="d-flex justify-content-center"> 
-    <div class="container-contact d-flex justify-content-center">
+    <div class="container  justify-content-center">
         <div class="row my-2 mx-2">
         
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                     <br>
                     <img src="{% static '/britishdenim/images/side.jpeg' %}" width="85%" height="80%" padding-right="50" padding-top="110">
                 
-            </div>
+            </div> -->
             
 
-            <div class="col-md-8">
+            <div class="col-8 col-sm-12">
                 <form method="POST">
                 {% csrf_token %}
                 
                     <br>
-                    <label for="inputSku" class="form-label">Sku</label>
-                    <input type="text" {% if sku != "_" %}readonly value= "{{ sku }}"{%endif%} class="form-control" id="inputSku" name="inputSku" placeholder="Enter SKU from item. Ex. RE-2345" >
+                    <label for="inputSku" class="form-label">Referencia</label>
+                    <input type="text" {% if sku != "_" %}readonly value= "{{ sku }}"{%endif%} class="form-control" id="inputSku" name="inputSku" placeholder="Busca la referencia. Ej. RE-2345" >
                     <br>
       
-                    <label for="inputEmail" class="form-label">Email</label>
+                    
+               
+                    {% if user.is_authenticated %}
+                    <label for="inputEmail" class="form-label">Tu Correo</label>
                     <input type="email" class="form-control" id="email" name="email" 
                     {% if user.is_authenticated %}
                     value= {{user.email}} readonly
                     {% endif %}
-                    >
-               
-                    {% if user.is_authenticated %}
-                   
+                    disabled>
                     {%else%} 
-                   
+                    <h5>Crea tu cuenta</h5>
+                    <label for="inputEmail" class="form-label">Correo</label>
+                    <input type="email" class="form-control" id="email" name="email" 
+                    
+                    >
                     <label for="inputPassword" class="form-label">Password</label>
                     <input type="password" class="form-control" id="inputPassword" name="inputPassword">
                  
-                    {% endif %}
+                    
               
                     <label for="first_name" class="form-label">Name</label>
                     <input type="text" class="form-control" id="first_name" name="first_name"
@@ -72,12 +74,13 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="getInfo" name="getInfo" checked>
                         <label class="form-check-label" for="getInfo">
-                        Send me information on future deals.
+                        Mantenme informado.
                         </label>
                     </div>
-            
-                  
-                        <button type="submit" class="btn btn-primary">Register</button>
+                    {% endif %}
+                        
+                        <button type="submit" class="btn btn-primary m-2">Register</button>
+                        
                         
                         
                   

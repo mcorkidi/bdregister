@@ -8374,7 +8374,6 @@ h1, h2, h3, h4, h5,
           background-position: center center !important; } }
       .owl-carousel.home-slider .slider-item .overlay {
         position: absolute;
-        overflow: scroll;
         top: 0;
         bottom: 0;
         left: 0;
@@ -8394,6 +8393,7 @@ h1, h2, h3, h4, h5,
           background-position: center center; }
           .owl-carousel.home-slider .slider-item .slider-text .one-third .overlay {
             position: absolute;
+            overflow: scroll;
             top: 0;
             bottom: 0;
             left: 0;
@@ -8414,6 +8414,7 @@ h1, h2, h3, h4, h5,
           @media (min-width: 768px) {
             .owl-carousel.home-slider .slider-item .slider-text .one-forth {
               position: absolute;
+              overflow: scroll;
               top: 0;
               left: 0;
               bottom: 0;
