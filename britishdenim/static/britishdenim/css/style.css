@@ -8323,7 +8323,8 @@ h1, h2, h3, h4, h5,
     opacity: 0; } }
 
 .owl-carousel {
-  position: relative; }
+  position: relative;
+  -webkit-overflow-scrolling: touch; }
   .owl-carousel .owl-item {
     opacity: .4; }
     .owl-carousel .owl-item.active {
