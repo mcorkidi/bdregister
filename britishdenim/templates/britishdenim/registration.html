@@ -3,8 +3,71 @@
 {% block body %} 
 {% load static %}
 <div class="container">
+    <div id="staticBackdrop" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content p-3">
+                <h5>Crea tu cuenta</h5>
+                <form  method="post">
+                    {% csrf_token %}
+                    <input type="text" name="inputSku" value="{{sku}}" hidden>
+                    <label for="inputEmail" class="form-label">Correo</label>
+                    <input type="email" class="form-control" id="email" name="email" 
+                    
+                    >
+                    <label for="inputPassword" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="inputPassword" name="inputPassword">
+                 
+                    
+              
+                    <label for="first_name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name"
+                    {% if user.is_authenticated %}
+                    value= {{user.first_name}} readonly
+                    {%endif%}>
+                    
+                    <label for="last_name" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name"
+                    {% if user.is_authenticated %}
+                    value= {{user.last_name}} readonly
+                    {% endif %}
+                    >
+                 
+                    <label for="city" class="form-label">Ciudad</label>
+                    <input type="text" class="form-control" id="city" name="city" placeholder="City" value={{city}}>
+                    
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="getInfo" name="getInfo" checked>
+                        <label class="form-check-label" for="getInfo">
+                        Mantenme informado.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" name="newUser">Listo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="loginScreen" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content p-3">
+                <h5>Ingresa tus datos</h5>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="text" name="inputSku" value="{{sku}}" hidden>
+                    <label for="inputEmail" class="form-label">Correo</label>
+                    <input type="email" class="form-control" id="email" name="email" >
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                 
+                    <button type="submit" class="btn btn-primary m-2" name="loginReg">Ingresar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
         {% if user.is_authenticated %}
-    <h2>Bienvenido {{user.first_name}}.</h2><br> <h4>Gracias por escanear otro producto.</h4>  
+    <h2>Bienvenido {{user.first_name}}.</h2><br> <h4>Gracias por escanear un producto.</h4>  
     {%else%}
         {% if sku != "_" %}
             <h2>Gracias por escanear el codigo QR. </h2><br>
@@ -16,20 +79,15 @@
 
     {%endif%}
 
-    <div class="container  justify-content-center">
+    
         <div class="row my-2 mx-2">
         
-            <!-- <div class="col-md-4">
-                    <br>
-                    <img src="{% static '/britishdenim/images/side.jpeg' %}" width="85%" height="80%" padding-right="50" padding-top="110">
-                
-            </div> -->
+            
             
 
-            <div class="col-8 col-sm-12">
-                <form method="POST">
-                {% csrf_token %}
-                
+            <div class="col-md-8 col-sm-12">
+                <form method="post">
+                    {% csrf_token %}
                     <br>
                     <label for="inputSku" class="form-label">Referencia</label>
                     <input type="text" {% if sku != "_" %}readonly value= "{{ sku }}"{%endif%} class="form-control" id="inputSku" name="inputSku" placeholder="Busca la referencia. Ej. RE-2345" >
@@ -41,55 +99,26 @@
                     <label for="inputEmail" class="form-label">Tu Correo</label>
                     <input type="email" class="form-control" id="email" name="email" 
                     {% if user.is_authenticated %}
-                    value= {{user.email}} readonly
+                    placeholder= {{user.email}} readonly 
                     {% endif %}
                     disabled>
+                    <button type="submit" class="btn btn-primary m-2"  name="regProd">Registrar Producto</button>
                     {%else%} 
-                    <h5>Crea tu cuenta</h5>
-                    <label for="inputEmail" class="form-label">Correo</label>
-                    <input type="email" class="form-control" id="email" name="email" 
-                    
-                    >
-                    <label for="inputPassword" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="inputPassword" name="inputPassword">
-                 
-                    
-              
-                    <label for="first_name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="first_name" name="first_name"
-                    {% if user.is_authenticated %}
-                    value= {{user.first_name}} readonly
-                    {%endif%}>
-                    
-                    <label for="last_name" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="last_name" name="last_name"
-                    {% if user.is_authenticated %}
-                    value= {{user.last_name}} readonly
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#staticBackdrop"  name="new">Registrate Primero</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginScreen"  name="loginBtn">Ya Tengo Usuario</button>
                     {% endif %}
-                    >
-                 
-                    <label for="city" class="form-label">City</label>
-                    <input type="text" class="form-control" id="city" name="city" placeholder="City" value={{city}}>
                     
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="getInfo" name="getInfo" checked>
-                        <label class="form-check-label" for="getInfo">
-                        Mantenme informado.
-                        </label>
-                    </div>
-                    {% endif %}
-                        
-                        <button type="submit" class="btn btn-primary m-2">Register</button>
+                </form>
                         
                         
                         
                   
             </div>
-        </form>
+    
         </div>
            
             
-    </div>
+ 
 </div> 
     {% endblock %} 
 

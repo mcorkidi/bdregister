@@ -16,6 +16,7 @@ from .serializers import ItemSerializer, LoginSerializer, LogoutSerializer
 import pycountry
 import json
 from django.views.decorators.cache import cache_page
+from user.models import Profile
 
 def ipInfo(addr=''):
     from urllib.request import urlopen
@@ -69,45 +70,85 @@ def register(request, sku):
     when = datetime.now()
 
     if request.method == 'POST':
-       
-        print(request.POST)
-        print(ipCall)
-        registeredSku = request.POST.get('inputSku',"")
-        email = request.POST.get('email',"")
-        username = email 
-        password = request.POST.get('inputPassword',"")
-        first_name = request.POST.get('first_name',"")
-        last_name = request.POST.get('last_name',"")
-        city = request.POST.get('city', "city")
-        getInfo = request.POST.get('getInfo', 'Off')
-        
-        if getInfo == 'on':
-            getInfo = True
-        else:
-            getInfo = False
-        #item must exist in db
-        item=items.get(sku=registeredSku)
-        
-        #if user does not exist, create new user, if user exist, request login, if session authenticated, continue
-        if request.user.is_authenticated:
-            user = request.user
-            pass
-        else:
+        if "newUser" in request.POST:
+            print(request.POST)
+            print(ipCall)
+            registeredSku = request.POST.get('inputSku',"")
+            email = request.POST.get('email',"")
+            username = email 
+            password = request.POST.get('inputPassword',"")
+            first_name = request.POST.get('first_name',"")
+            last_name = request.POST.get('last_name',"")
+            city = request.POST.get('city', "city")
+            getInfo = request.POST.get('getInfo', 'Off')
+            
+            
+            if getInfo == 'on':
+                getInfo = True
+            else:
+                getInfo = False
+            #item must exist in db
+            
             if User.objects.filter(email=email).exists():
                 messages.error(request, 'Error: Correo ya registrado, ingresa a la pagina con tu correo.')
-                return render(request, 'britishdenim/registration.html')
+                return redirect('register', sku=sku)
             user = User.objects.create_user(username,email,password)
             user.first_name = first_name
             user.last_name = last_name
             user.email_address = email
             user.save()
+            newProfile = Profile.objects.create(user=user)
+            newProfile.save()
+            auth = authenticate(request, username=username, password=password)
+            if auth:
+                login(request, auth)
+            messages.success(request, "Te registraste exitosamente, bienvenido.")
+            try:
+                item=items.get(sku=registeredSku)
+            except:
+                messages.error(request, "Referencia ingresada no se encontro en el systema. Revisa y trata nuevamente.")
+                return redirect('register', sku=sku)
+            newConsumer = Consumer(user_id=user,sku=item, where=where,when=when,country=country,city=city,getInfo=getInfo )
+            newConsumer.save()
+            messages.success(request, f"Producto {item.sku} {item.name} registrado exitosamente a tu perfil. ")
+            return redirect('profile')
+            
 
-        #create consumer registration
-        newConsumer = Consumer(user_id=user,sku=item, where=where,when=when,country=country,city=city,getInfo=getInfo )
-        newConsumer.save()
+        if "loginReg" in request.POST:
+            registeredSku = request.POST.get('inputSku',"")
+            username = request.POST['email']
+            password = request.POST['password']
+            auth = authenticate(request, username=username, password=password)
+            if auth:
+                login(request, auth)
+                try:
+                    item=items.get(sku=registeredSku)
+                except:
+                    messages.error(request, "Referencia ingresada no se encontro en el systema. Revisa y trata nuevamente.")
+                    return redirect('register', sku=sku)
+                newConsumer = Consumer(user_id=request.user,sku=item, where=where,when=when,country=country,city=city )
+                newConsumer.save()
+                messages.success(request, f'Bienvenido {auth.first_name}. Gracias por registrar un producto.')
+                return redirect('profile')
+            else:
+                messages.error(request, "Credenciales incorrectos.")
+                return redirect('register', sku=sku)
+            
+        if "regProd" in request.POST:
+            print("sku is,",sku)
+            registeredSku = request.POST.get('inputSku',"")
+            try:
+                item=items.get(sku=registeredSku)
+            except:
+                messages.error(request, "Referencia ingresada no se encontro en el systema. Revisa y trata nuevamente.")
+                return redirect('register', sku=sku)
+            newConsumer = Consumer(user_id=request.user,sku=item, where=where,when=when,country=country,city=city)
+            newConsumer.save()
+            messages.success(request, f"Producto {item.sku} {item.name} registrado exitosamente a tu perfil. ")
+            return redirect('profile')
 
-        #inform user everything saved ok and direct to profile to view registered products
-        return redirect('profile')
+      
+        
 
     if sku == '_':
         pass
