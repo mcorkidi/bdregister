@@ -188,7 +188,7 @@ def get_country_name(country_code):
         pass
     return None
 
-@cache_page(60 * 15)
+@cache_page(60 * 1440)
 @staff_member_required
 def stats(request):
     scans = Scan.objects.all()
@@ -221,7 +221,7 @@ def stats(request):
     
     return render(request, 'britishdenim/stats.html', context)
 
-@cache_page(60 * 15)
+@cache_page(60 * 1440)
 @staff_member_required
 def charts(request):
     scans = Scan.objects.all()
@@ -330,11 +330,16 @@ def charts(request):
 def consumer(request):
     consumer = Consumer.objects.all().order_by('country')
     consumers = {}
+   
     for c in consumer:
+        
         if c.user_id.username in consumers:
-            consumers[c].append(c.sku)
+            print("1", c.sku.sku)
+            consumers[c.user_id.username].append(c.sku.sku)
         else:
-            consumers[c] = [c.sku]
+            consumers[c.user_id.username] = [c.sku.sku]
+            
+    print(consumers.keys())
     count = consumer.count()
     context = {'consumers':consumers, 'count':count}
     return render(request, 'britishdenim/consumer.html', context)

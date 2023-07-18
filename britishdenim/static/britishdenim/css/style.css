@@ -8324,8 +8324,6 @@ h1, h2, h3, h4, h5,
 
 .owl-carousel {
   position: relative;
-  overflow-x: visible;
-  -webkit-overflow-scrolling: touch;
   }
   .owl-carousel .owl-item {
     opacity: .4; }

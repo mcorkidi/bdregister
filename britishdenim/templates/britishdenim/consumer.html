@@ -45,10 +45,10 @@
                                 <tbody>
                                     {% for user, skus in consumers.items %}
                                     <tr>
-                                        <td>{{user.user_id.username}}</td>
+                                        <td>{{user}}</td>
                                         <td>{{user.user_id.first_name}} {{user.user_id.last_name}}</td>
                                         <td>{{user.country}}</td>
-                                        <td>{% for sku in skus %}{{sku.sku}} {%endfor%} </td>
+                                        <td>{% for sku in skus %}{{sku}} {%endfor%} </td>
                                     </tr>
                                     {%endfor%} 
                                     
